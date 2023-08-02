@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'gen/assets.gen.dart';
-import 'model/fake_data.dart';
+import '../gen/assets.gen.dart';
+import '../model/fake_data.dart';
 import 'my_colors.dart';
 
 class TechDivider extends StatelessWidget {

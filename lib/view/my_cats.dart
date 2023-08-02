@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../component/my_colors.dart';
+import '../component/my_component.dart';
+import '../component/my_string.dart';
 import '../gen/assets.gen.dart';
 import '../model/fake_data.dart';
-import '../my_colors.dart';
-import '../my_component.dart';
-import '../my_string.dart';
+
 
 class MyCats extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _MyCatsState extends State<MyCats> {
     return SafeArea(
         child: Scaffold(
             body: SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       child: Padding(
         padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
         child: Center(
@@ -29,14 +30,14 @@ class _MyCatsState extends State<MyCats> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 32,
               ),
               SvgPicture.asset(
                 Assets.images.tcbot.path,
                 height: 100,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 16,
               ),
               Text(
@@ -50,7 +51,7 @@ class _MyCatsState extends State<MyCats> {
                     hintText: "نام و نام خانوادگی",
                     hintStyle: textTheme.headline4),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 32,
               ),
               Text(

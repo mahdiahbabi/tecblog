@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:validators/validators.dart';
 
+import '../component/my_string.dart';
 import '../gen/assets.gen.dart';
-import '../my_string.dart';
 import 'my_cats.dart';
 
 class RegisterIntro extends StatelessWidget {
@@ -36,7 +36,7 @@ class RegisterIntro extends StatelessWidget {
               padding: const EdgeInsets.only(top: 32),
               child: ElevatedButton(
                 onPressed: () {
-                  _activateCodeBottomSheet(context, size, textTheme);
+                  _showEmailBottomSheet(context, size, textTheme);
                 },
                 child: const Text("بزن بریم"),
               ),
