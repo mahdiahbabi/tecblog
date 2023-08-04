@@ -1,5 +1,9 @@
-class MyStrings{
 
+
+
+
+class MyStrings{
+  static const String githuburl = "https://github.com/mahdiahbabi/tecblog";
   static const String viewHotestBlog = "مشاهده داغ ترین نوشته ها ";
   static const String viewHotestPodCasts ="مشاهده داغ ترین پادکست ها";
   static const String relatedArticle ="نوشته های مرتبط";
@@ -10,6 +14,7 @@ class MyStrings{
   static const String myFavPodcast ="پادکست های مورد علاقه من";
   static const String logOut ="خروج از حساب کاربری";
   static const String insertYourEmail ="لطفا ایمیلت رو وارد کن";
+  static const String share =" به تک بلاگ بپیوندید ";
   static const String activateCode ="کد فعال سازی رو وارد کن ";
   static const String chooseCats ="دسته بندی هایی که دوست داری رو انتخاب کن";
   static const String welcom ="""به تک‌بلاگ خوش اومدی
@@ -26,3 +31,4 @@ class MyStrings{
  
 
 }
+

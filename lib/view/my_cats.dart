@@ -22,7 +22,7 @@ class _MyCatsState extends State<MyCats> {
     return SafeArea(
         child: Scaffold(
             body: SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
         child: Center(
@@ -30,14 +30,14 @@ class _MyCatsState extends State<MyCats> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               SvgPicture.asset(
                 Assets.images.tcbot.path,
                 height: 100,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Text(
@@ -51,7 +51,7 @@ class _MyCatsState extends State<MyCats> {
                     hintText: "نام و نام خانوادگی",
                     hintStyle: textTheme.headline4),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               Text(
