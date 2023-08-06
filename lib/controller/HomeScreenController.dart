@@ -6,7 +6,7 @@ import '../model/tecblog.dart';
 import '../service/DioServise.dart';
 
 class HomeScreenController extends GetxController {
-  bool loading = true;
+  RxBool loading =RxBool(true);
   late Rx<PosterModel> poster;
   RxList tagsList = RxList();
   RxList<ArticleModel> topVisitedList = RxList();
@@ -21,7 +21,7 @@ class HomeScreenController extends GetxController {
   }
 
   getHomeItems() async {
-    loading = true;
+    loading = true.obs;
     var response = await DioService().getHomePageBlog(ConstantUrl.blogUrl);
 
     if (response.statusCode == 200) {
@@ -35,6 +35,6 @@ class HomeScreenController extends GetxController {
         tagsList.add(TagsModel.fromjson(element));
       });
     }
-    loading = false;
+    loading = false.obs;
   }
 }

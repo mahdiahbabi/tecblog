@@ -27,122 +27,123 @@ class MainScreen extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
     double bodyMargin = size.width / 10;
-    return SafeArea(
-        child: homeScreenController.loading
-            ? spinkit(Colors.pink)
-            : Scaffold(
-                key: _key,
-                drawer: Drawer(
-                  backgroundColor: SolidColors.scafoldBg,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(right: bodyMargin, left: bodyMargin),
-                    child: ListView(
+    return Obx(
+      ()=>homeScreenController.loading.value == true ? spinkit(Colors.pink): SafeArea(
+          child: Scaffold(
+                  key: _key,
+                  drawer: Drawer(
+                    backgroundColor: SolidColors.scafoldBg,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+                      child: ListView(
+                        children: [
+                          DrawerHeader(
+                              child: Center(
+                            child: Image.asset(
+                              Assets.images.logo.path,
+                              scale: 3,
+                            ),
+                          )),
+                          ListTile(
+                            title: Text(
+                              "پروفایل کاربری",
+                              style: textTheme.headline4,
+                            ),
+                            onTap: () {},
+                          ),
+                          const Divider(
+                            color: SolidColors.dividerColor,
+                          ),
+                          ListTile(
+                            title: Text(
+                              "درباره تک‌بلاگ",
+                              style: textTheme.headline4,
+                            ),
+                            onTap: () {},
+                          ),
+                          const Divider(
+                            color: SolidColors.dividerColor,
+                          ),
+                          ListTile(
+                            title: Text(
+                              "اشتراک گذاری تک بلاگ",
+                              style: textTheme.headline4,
+                            ),
+                            onTap: () async {
+                              await Share.share(MyStrings.share);
+                            },
+                          ),
+                          const Divider(
+                            color: SolidColors.dividerColor,
+                          ),
+                          ListTile(
+                            title: Text(
+                              "تک‌بلاگ در گیت هاب",
+                              style: textTheme.headline4,
+                            ),
+                            onTap: () {
+                              gitHubUrl(MyStrings.githuburl);
+                            },
+                          ),
+                          const Divider(
+                            color: SolidColors.dividerColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  appBar: AppBar(
+                    automaticallyImplyLeading: false,
+                    elevation: 0,
+                    backgroundColor: SolidColors.scafoldBg,
+                    title: //appbar
+                        Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        DrawerHeader(
-                            child: Center(
-                          child: Image.asset(
-                            Assets.images.logo.path,
-                            scale: 3,
+                        InkWell(
+                          onTap: (() {
+                            _key.currentState!.openDrawer();
+                          }),
+                          child: const Icon(
+                            Icons.menu,
+                            color: Colors.black,
                           ),
-                        )),
-                        ListTile(
-                          title: Text(
-                            "پروفایل کاربری",
-                            style: textTheme.headline4,
-                          ),
-                          onTap: () {},
                         ),
-                        const Divider(
-                          color: SolidColors.dividerColor,
+                        Image(
+                          image: Assets.images.logo.image().image,
+                          height: size.height / 13.6,
                         ),
-                        ListTile(
-                          title: Text(
-                            "درباره تک‌بلاگ",
-                            style: textTheme.headline4,
-                          ),
-                          onTap: () {},
-                        ),
-                        const Divider(
-                          color: SolidColors.dividerColor,
-                        ),
-                        ListTile(
-                          title: Text(
-                            "اشتراک گذاری تک بلاگ",
-                            style: textTheme.headline4,
-                          ),
-                          onTap: () async {
-                            await Share.share(MyStrings.share);
-                          },
-                        ),
-                        const Divider(
-                          color: SolidColors.dividerColor,
-                        ),
-                        ListTile(
-                          title: Text(
-                            "تک‌بلاگ در گیت هاب",
-                            style: textTheme.headline4,
-                          ),
-                          onTap: () {
-                            gitHubUrl(MyStrings.githuburl);
-                          },
-                        ),
-                        const Divider(
-                          color: SolidColors.dividerColor,
-                        ),
+                        const Icon(Icons.search, color: Colors.black),
                       ],
                     ),
                   ),
-                ),
-                appBar: AppBar(
-                  automaticallyImplyLeading: false,
-                  elevation: 0,
-                  backgroundColor: SolidColors.scafoldBg,
-                  title: //appbar
-                      Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  body: Stack(
                     children: [
-                      InkWell(
-                        onTap: (() {
-                          _key.currentState!.openDrawer();
-                        }),
-                        child: const Icon(
-                          Icons.menu,
-                          color: Colors.black,
-                        ),
+                      Positioned.fill(child:  IndexedStack(
+                          index: selectedPageIndex.value,
+                          children: [
+                            HomeScreen(
+                                size: size,
+                                textTheme: textTheme,
+                                bodyMargin: bodyMargin), //0
+                            const ProfileScreen() //1
+                          ],
+                        )
+
+  ),
+
+                      BottomNavigation(
+                        size: size,
+                        bodyMargin: bodyMargin,
+                        changeScreen: (int value) {
+                          selectedPageIndex.value = value;
+                        },
                       ),
-                      Image(
-                        image: Assets.images.logo.image().image,
-                        height: size.height / 13.6,
-                      ),
-                      const Icon(Icons.search, color: Colors.black),
                     ],
                   ),
-                ),
-                body: Stack(
-                  children: [
-                    Positioned.fill(child: Obx(() {
-                      return IndexedStack(
-                        index: selectedPageIndex.value,
-                        children: [
-                          HomeScreen(
-                              size: size,
-                              textTheme: textTheme,
-                              bodyMargin: bodyMargin), //0
-                          const ProfileScreen() //1
-                        ],
-                      );
-                    })),
-                    BottomNavigation(
-                      size: size,
-                      bodyMargin: bodyMargin,
-                      changeScreen: (int value) {
-                        selectedPageIndex.value = value;
-                      },
-                    ),
-                  ],
-                ),
-              ));
+                )),
+    );
   }
 }
 
