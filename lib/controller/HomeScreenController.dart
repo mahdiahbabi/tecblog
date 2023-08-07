@@ -1,3 +1,5 @@
+
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:tecblog/component/constanturl.dart';
@@ -6,8 +8,9 @@ import '../model/tecblog.dart';
 import '../service/DioServise.dart';
 
 class HomeScreenController extends GetxController {
-  RxBool loading =RxBool(true);
-  late Rx<PosterModel> poster;
+
+  RxBool loading = true.obs;
+   late Rx<PosterModel> poster = PosterModel().obs ;
   RxList tagsList = RxList();
   RxList<ArticleModel> topVisitedList = RxList();
   RxList<PodcastModel> topPodcastsList = RxList();
@@ -18,11 +21,12 @@ class HomeScreenController extends GetxController {
   onInit() {
     super.onInit();
     getHomeItems();
+
   }
 
   getHomeItems() async {
-    loading = true.obs;
-    var response = await DioService().getHomePageBlog(ConstantUrl.blogUrl);
+    loading.value = true;
+    var response = await DioService().getMethod(ConstantUrl.getHomeItems);
 
     if (response.statusCode == 200) {
       response.data['top_visited'].forEach((element) {
@@ -34,7 +38,10 @@ class HomeScreenController extends GetxController {
       response.data['tags'].forEach((element) {
         tagsList.add(TagsModel.fromjson(element));
       });
+poster.value = PosterModel.fromjson(response.data['poster']);
+
     }
-    loading = false.obs;
+    loading.value = false;
+
   }
 }

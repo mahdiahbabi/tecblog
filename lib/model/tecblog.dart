@@ -1,4 +1,3 @@
-import 'package:tecblog/component/my_string.dart';
 
 import '../component/constanturl.dart';
 
@@ -28,7 +27,7 @@ class ArticleModel {
   ArticleModel.fromjson(Map<String, dynamic> element) {
     id = element["id"];
     title = element["title"];
-    image = ConstantUrl.baseUrl+element["image"];
+    image = ConstantUrl.hostDlUrl + element["image"];
     cat_id = element["cat_id"];
     cat_name = element["cat_name"];
     author = element["author"];
@@ -61,7 +60,7 @@ class PodcastModel {
   PodcastModel.fromjson(Map<String, dynamic> element) {
     id = element["id"];
     title = element["title"];
-    poster = ConstantUrl.baseUrl+element["poster"];
+    poster = ConstantUrl.hostDlUrl+element["poster"];
     cat_name = element["cat_name"];
     author = element["author"];
     view = element["view"];
@@ -76,15 +75,15 @@ class PosterModel {
   String? image;
 
   PosterModel({
-    required this.id,
-    required this.title,
-    required this.image,
+     this.id,
+     this.title,
+     this.image,
   });
 
   PosterModel.fromjson(Map<String, dynamic> element) {
     id = element["id"];
     title = element["title"];
-    image = element["image"];
+    image = ConstantUrl.hostDlUrl+element["image"];
   }
 }
 

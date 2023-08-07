@@ -1,4 +1,6 @@
 
+
+
 import '../gen/assets.gen.dart';
 import 'data_models.dart';
 
@@ -23,7 +25,7 @@ List<HashTagModel> tagList = [
   HashTagModel(title: "iot"),
   HashTagModel(title: "دارت"),
 
-]; 
+];
 List<HashTagModel>selectedTags = [];
 
 
@@ -41,7 +43,7 @@ List<BlogModel> blogList = [
 طبق گزارش‌های منتشر شده، ماسک در مجموع پنج فرم 4 را به کمیسیون بورس و اوراق بهادار ایالات متحده (SEC) ارائه کرده که تمام 138 تراکنش فردی او را پوشش می‌دهد. بر اساس محاسبات TechCrunch، ارزش سهام فروخته شده، نزدیک به 4 میلیارد دلار است. به گزارش رویترز، این میزان معادل 2.6 درصد از سهام او در تسلا محسوب می‌شود
       """,
       views: "256"
-      ),
+  ),
   BlogModel(
       id: 2,
       imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg",
@@ -128,7 +130,7 @@ List<BlogModel> blogList = [
 طبق گزارش‌های منتشر شده، ماسک در مجموع پنج فرم 4 را به کمیسیون بورس و اوراق بهادار ایالات متحده (SEC) ارائه کرده که تمام 138 تراکنش فردی او را پوشش می‌دهد. بر اساس محاسبات TechCrunch، ارزش سهام فروخته شده، نزدیک به 4 میلیارد دلار است. به گزارش رویترز، این میزان معادل 2.6 درصد از سهام او در تسلا محسوب می‌شود
       """
       ,views: "256"
-),
+  ),
   BlogModel(
       id: 7,
       imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg",
@@ -217,7 +219,7 @@ List<BlogModel> blogList = [
       """
       ,views: "256"
 
-),
+  ),
   BlogModel(
       id: 12,
       imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg",
@@ -304,7 +306,7 @@ List<BlogModel> blogList = [
       """
       ,views: "256"
 
-  ) 
+  )
 ];
 
 
@@ -312,49 +314,49 @@ List<BlogModel> blogList = [
 List<PodcastModel> podcastList = [
 
   PodcastModel(
-    id: 1, 
-    imageUrl: "https://static.digiato.com/digiato/2023/07/image-86-910x600.jpg", 
-    title: "دارما پادکست",
-    writer: "الهه رعوفی"),
+      id: 1,
+      imageUrl: "https://static.digiato.com/digiato/2023/07/image-86-910x600.jpg",
+      title: "دارما پادکست",
+      writer: "الهه رعوفی"),
   PodcastModel(
-    id: 2, 
-    imageUrl: "https://digiato.com/wp-content/uploads/2022/04/ESA-rendering-released-.jpg", 
-    title: " پادکست فضا",
-    writer: "محمد رعوفی"),
+      id: 2,
+      imageUrl: "https://digiato.com/wp-content/uploads/2022/04/ESA-rendering-released-.jpg",
+      title: " پادکست فضا",
+      writer: "محمد رعوفی"),
   PodcastModel(
-    id: 2, 
-    imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg", 
-    title: " مکست",
-    writer: "امیر رعوفی"),
+      id: 2,
+      imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg",
+      title: " مکست",
+      writer: "امیر رعوفی"),
   PodcastModel(
-    id: 3, 
-    imageUrl: "https://static.digiato.com/digiato/2023/07/image-86-910x600.jpg", 
-    title: "دارما پادکست",
-    writer: "الهه رعوفی"),
+      id: 3,
+      imageUrl: "https://static.digiato.com/digiato/2023/07/image-86-910x600.jpg",
+      title: "دارما پادکست",
+      writer: "الهه رعوفی"),
   PodcastModel(
-    id: 4, 
-    imageUrl: "https://digiato.com/wp-content/uploads/2022/04/ESA-rendering-released-.jpg", 
-    title: " پادکست فضا",
-    writer: "محمد رعوفی"),
+      id: 4,
+      imageUrl: "https://digiato.com/wp-content/uploads/2022/04/ESA-rendering-released-.jpg",
+      title: " پادکست فضا",
+      writer: "محمد رعوفی"),
   PodcastModel(
-    id: 5, 
-    imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg", 
-    title: " مکست",
-    writer: "امیر رعوفی"),
+      id: 5,
+      imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg",
+      title: " مکست",
+      writer: "امیر رعوفی"),
   PodcastModel(
-    id: 6, 
-    imageUrl: "https://shenoto-album.s3.ir-thr-at1.arvanstorage.com/52bb7cfc-8aa2-4e61-b01e-0eae61f5aa15/cover/500.jpg", 
-    title: "دارما پادکست",
-    writer: "الهه رعوفی"),
+      id: 6,
+      imageUrl: "https://shenoto-album.s3.ir-thr-at1.arvanstorage.com/52bb7cfc-8aa2-4e61-b01e-0eae61f5aa15/cover/500.jpg",
+      title: "دارما پادکست",
+      writer: "الهه رعوفی"),
   PodcastModel(
-    id: 7, 
-    imageUrl: "https://digiato.com/wp-content/uploads/2022/04/ESA-rendering-released-.jpg", 
-    title: " پادکست فضا",
-    writer: "محمد رعوفی"),
+      id: 7,
+      imageUrl: "https://digiato.com/wp-content/uploads/2022/04/ESA-rendering-released-.jpg",
+      title: " پادکست فضا",
+      writer: "محمد رعوفی"),
   PodcastModel(
-    id: 8, 
-    imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg", 
-    title: " مکست",
-    writer: "امیر رعوفی"),
+      id: 8,
+      imageUrl: "https://digiato.com/wp-content/uploads/2022/04/photo_2022-04-29_09-06-13.jpg",
+      title: " مکست",
+      writer: "امیر رعوفی"),
 
 ];

@@ -2,9 +2,9 @@
 
 class HashTagModel{
 
-String title;
+  String title;
 
-HashTagModel({required this.title});
+  HashTagModel({required this.title});
 
 
 }
@@ -36,7 +36,7 @@ class BlogModel {
 
 
 
-  
+
 
 class PodcastModel {
 
@@ -44,14 +44,13 @@ class PodcastModel {
   String imageUrl;
   String title;
   String writer;
- 
+
   PodcastModel({
     required this.id,
     required this.imageUrl,
     required this.title,
     required this.writer,
- 
-  });
-  
-}
 
+  });
+
+}

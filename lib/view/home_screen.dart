@@ -1,9 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tecblog/controller/HomeScreenController.dart';
+import 'package:tecblog/view/ArticlePage.dart';
 import '../component/my_colors.dart';
 import '../component/my_component.dart';
 import '../component/my_string.dart';
@@ -22,7 +21,7 @@ class HomeScreen extends StatelessWidget {
   final Size size;
   final TextTheme textTheme;
   final double bodyMargin;
-   HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
         child: Column(
           children: [
-            HomePagePoster(),
+            HomePagePoster(context),
             const SizedBox(
               height: 16,
             ),
@@ -40,8 +39,8 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 32,
             ),
-           SeeMoreBlog(),
-           HomePageBlogList(),
+            SeeMoreBlog(),
+            HomePageBlogList(),
             const SizedBox(
               height: 32,
             ),
@@ -67,21 +66,22 @@ class HomeScreen extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
               child: Obx(
-                  ()=> Column(
+                () => Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        height: size.height / 5.3,
-                        width: size.width / 2.4,
-                        child: cached_network_spinkit(homeScreenController.topPodcastsList[index].poster!, false)
-                        ),
-                      ),
-
+                          height: size.height / 5.3,
+                          width: size.width / 2.4,
+                          child: cached_network_spinkit(
+                              homeScreenController
+                                  .topPodcastsList[index].poster!,
+                              false)),
+                    ),
                     SizedBox(
                         width: size.width / 2.4,
                         child: Text(
-                         homeScreenController.topPodcastsList[index].title!,
+                          homeScreenController.topPodcastsList[index].title!,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ))
@@ -114,66 +114,60 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget HomePagePoster() {
-    return Stack(
-      children: [
-        Container(
-          width: size.width / 1.25,
-          height: size.height / 4.2,
-          decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              image: DecorationImage(
-                  image: AssetImage(homePagePosterMap["imageAsset"]),
-                  fit: BoxFit.cover)),
-          foregroundDecoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              gradient: LinearGradient(
-                colors: GradiantColors.homePosterCoverGradiant,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              )),
-        ),
-        Positioned(
-          bottom: 8,
-          left: 0,
-          right: 0,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+  Widget HomePagePoster(context) {
+    return Obx(
+      () => Container(
+        height: 250,
+        width: MediaQuery.of(context).size.width-20,
+
+
+        child: Stack(
+
+          children: [
+cached_network_spinkit(homeScreenController.poster.value.image!, true),
+            Positioned(
+              bottom: 8,
+              left: 0,
+              right: 0,
+              child: Column(
                 children: [
-                  Text(
-                    homePagePosterMap["writer"] +
-                        " - " +
-                        homePagePosterMap["date"],
-                    style: textTheme.subtitle1,
-                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        homePagePosterMap["view"],
+                        homePagePosterMap["writer"] +
+                            " - " +
+                            homePagePosterMap["date"],
                         style: textTheme.subtitle1,
                       ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      const Icon(
-                        Icons.remove_red_eye_sharp,
-                        color: Colors.white,
-                        size: 16,
+                      Row(
+                        children: [
+                          Text(
+                            homePagePosterMap["view"],
+                            style: textTheme.subtitle1,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          const Icon(
+                            Icons.remove_red_eye_sharp,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ],
                       ),
                     ],
                   ),
+                  Text(
+                    homeScreenController.poster.value.title!,
+                    style: textTheme.headline1,
+                  ),
                 ],
               ),
-              Text(
-                "دوازده قدم برنامه نویسی یک دوره ی...س",
-                style: textTheme.headline1,
-              ),
-            ],
-          ),
-        )
-      ],
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -208,17 +202,19 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          Text(
-            MyStrings.viewHotestBlog,
-            style: textTheme.headline3,
+          InkWell(
+            onTap: () => Get.to(() => ArticlePage()),
+            child: Text(
+              MyStrings.viewHotestBlog,
+              style: textTheme.headline3,
+            ),
           )
         ],
       ),
     );
   }
 
-
-  Widget HomePageBlogList(){
+  Widget HomePageBlogList() {
     return SizedBox(
       height: size.height / 3.2,
       child: ListView.builder(
@@ -226,73 +222,71 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
             //blog item
-            return  Padding(
-                padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: size.height / 5.3,
-                        width: size.width / 2.4,
-                        child:  Obx(
-                            ()=> Stack(
-                              children: [
-                                cached_network_spinkit(homeScreenController.topVisitedList[index].image! , true ),
-                                Positioned(
-                                  bottom: 8,
-                                  left: 0,
-                                  right: 0,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+            return Padding(
+              padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: size.height / 5.3,
+                      width: size.width / 2.4,
+                      child: Obx(
+                        () => Stack(
+                          children: [
+                            cached_network_spinkit(
+                                homeScreenController
+                                    .topVisitedList[index].image!,
+                                true),
+                            Positioned(
+                              bottom: 8,
+                              left: 0,
+                              right: 0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    homeScreenController
+                                        .topVisitedList[index].author!,
+                                    style: textTheme.subtitle1,
+                                  ),
+                                  Row(
                                     children: [
                                       Text(
-                                        homeScreenController.topVisitedList[index].author!,
+                                        homeScreenController
+                                            .topVisitedList[index].view!,
                                         style: textTheme.subtitle1,
                                       ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            homeScreenController.topVisitedList[index].view!,
-                                            style: textTheme.subtitle1,
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          const Icon(
-                                            Icons.remove_red_eye_sharp,
-                                            color: Colors.white,
-                                            size: 16,
-                                          ),
-                                        ],
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      const Icon(
+                                        Icons.remove_red_eye_sharp,
+                                        color: Colors.white,
+                                        size: 16,
                                       ),
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
-                        ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                       ),
-
-                    SizedBox(
-                        width: size.width / 2.4,
-                        child: Text(
-                          homeScreenController.topVisitedList[index].title!,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ))
-                  ],
-                ),
-
+                    ),
+                  ),
+                  SizedBox(
+                      width: size.width / 2.4,
+                      child: Text(
+                        homeScreenController.topVisitedList[index].title!,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ))
+                ],
+              ),
             );
           })),
     );
-
   }
 }
-
-
-
-
-

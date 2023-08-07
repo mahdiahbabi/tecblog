@@ -8,7 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../controller/HomeScreenController.dart';
 import '../gen/assets.gen.dart';
-import '../model/fake_data.dart';
+
 import 'my_colors.dart';
 
 class TechDivider extends StatelessWidget {
@@ -105,7 +105,7 @@ Widget cached_network_spinkit(String imageurl,bool foreground){
           borderRadius:
           const BorderRadius.all(Radius.circular(16)),
 
-          image: DecorationImage(image: imageProvider,fit: BoxFit.cover),),
+          image: DecorationImage(image: imageProvider,fit: BoxFit.cover,),),
         foregroundDecoration: foreground ==true ? const BoxDecoration(
             borderRadius:
             BorderRadius.all(Radius.circular(16)),
@@ -114,6 +114,28 @@ Widget cached_network_spinkit(String imageurl,bool foreground){
                 end: Alignment.topCenter,
                 colors: GradiantColors.blogPost ),
         ) : null
+
+      );
+
+    },
+  );
+}
+
+
+
+Widget cached_network_spinkit_placeholder(String imageurl){
+  return CachedNetworkImage(imageUrl: imageurl,
+    placeholder: (context, url)=>spinkit(Colors.pink),
+    errorWidget: (context , url , eror)=> const Icon(Icons.image_not_supported),
+    imageBuilder: (context,imageProvider){
+      return Container(
+          decoration: BoxDecoration(
+
+            borderRadius:
+            const BorderRadius.all(Radius.circular(16)),
+
+            image: DecorationImage(image: imageProvider,fit: BoxFit.cover,),),
+
 
       );
 

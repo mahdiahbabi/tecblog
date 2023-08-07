@@ -6,7 +6,6 @@ import 'package:validators/validators.dart';
 
 import '../component/my_string.dart';
 import '../gen/assets.gen.dart';
-import 'my_cats.dart';
 
 class RegisterIntro extends StatelessWidget {
   const RegisterIntro({Key? key}) : super(key: key);
@@ -149,7 +148,7 @@ class RegisterIntro extends StatelessWidget {
                   ElevatedButton(onPressed: (() {
 
 
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MyCats()));
+                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MyCats()));
 
                   }), child: Text("ادامه"))
                 ],

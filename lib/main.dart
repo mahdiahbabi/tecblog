@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:tecblog/view/main_screen.dart';
 import 'component/my_colors.dart';
 
@@ -31,15 +31,8 @@ class MyApp extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
 
-    return MaterialApp(
-      localizationsDelegates: const [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-           ],
-      supportedLocales: const [
-        Locale('fa', ''), // farsi
-      ],
+    return GetMaterialApp(
+      locale: Locale('fa'),
       theme: ThemeData(
 
 
