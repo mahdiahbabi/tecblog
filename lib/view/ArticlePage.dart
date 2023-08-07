@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tecblog/component/my_component.dart';
 import 'package:tecblog/component/my_string.dart';
+import 'package:tecblog/controller/ArticleInfoController.dart';
 import 'package:tecblog/controller/ArticlePageController.dart';
+import 'package:tecblog/view/ArticleInfo.dart';
 
 import '../component/my_colors.dart';
 
@@ -19,6 +21,8 @@ class ArticlePage extends StatefulWidget {
 class _ArticlePageState extends State<ArticlePage> {
   ArticlePageController articlePageController =
       Get.put(ArticlePageController());
+  ArticleInfoController articleInfoController =
+      Get.put(ArticleInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +47,10 @@ class _ArticlePageState extends State<ArticlePage> {
                   itemCount: articlePageController.articleList.length,
                   itemBuilder: ((context, index) {
                     return GestureDetector(
-                      // onTap: (() async {
-                      //   await .getArticleInfo(
-                      //       listArticleController.articleList[index].id);
-                      //   Get.toNamed(NamedRoute.routeSingleArticle);
-                      // }),
+                      onTap: (()  {
+                        articleInfoController.id.value=articlePageController.articleList.value[index].id!;
+                        Get.to(ArticleInfo());
+                      }),
                       child: Padding(
                         padding: EdgeInsets.all(10),
                         child: Row(

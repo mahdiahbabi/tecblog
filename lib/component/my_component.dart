@@ -94,7 +94,7 @@ Widget spinkit(Color color) {
 }
 
 
-Widget cached_network_spinkit(String imageurl,bool foreground){
+Widget cached_network_spinkit(String imageurl,bool foreground, List<Color> color){
   return CachedNetworkImage(imageUrl: imageurl,
     placeholder: (context, url)=>spinkit(Colors.pink),
     errorWidget: (context , url , eror)=> const Icon(Icons.image_not_supported),
@@ -103,16 +103,16 @@ Widget cached_network_spinkit(String imageurl,bool foreground){
         decoration: BoxDecoration(
 
           borderRadius:
-          const BorderRadius.all(Radius.circular(16)),
+           BorderRadius.all(Radius.circular(16)),
 
           image: DecorationImage(image: imageProvider,fit: BoxFit.cover,),),
-        foregroundDecoration: foreground ==true ? const BoxDecoration(
+        foregroundDecoration: foreground ==true ?  BoxDecoration(
             borderRadius:
-            BorderRadius.all(Radius.circular(16)),
+            const BorderRadius.all(Radius.circular(16)),
             gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
-                colors: GradiantColors.blogPost ),
+                colors: color ),
         ) : null
 
       );

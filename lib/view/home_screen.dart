@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                           child: cached_network_spinkit(
                               homeScreenController
                                   .topPodcastsList[index].poster!,
-                              false)),
+                              false, GradiantColors.blogPost)),
                     ),
                     SizedBox(
                         width: size.width / 2.4,
@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
         child: Stack(
 
           children: [
-cached_network_spinkit(homeScreenController.poster.value.image!, true),
+cached_network_spinkit(homeScreenController.poster.value.image!, true,GradiantColors.blogPost),
             Positioned(
               bottom: 8,
               left: 0,
@@ -237,7 +237,7 @@ cached_network_spinkit(homeScreenController.poster.value.image!, true),
                             cached_network_spinkit(
                                 homeScreenController
                                     .topVisitedList[index].image!,
-                                true),
+                                true,GradiantColors.blogPost),
                             Positioned(
                               bottom: 8,
                               left: 0,
