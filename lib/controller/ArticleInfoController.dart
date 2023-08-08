@@ -14,27 +14,39 @@ import '../service/DioServise.dart';
 class ArticleInfoController extends GetxController{
   RxBool loading = false.obs;
   RxString id = '0'.obs;
-  late Rx<ArticleInfoModel> articleinfo = ArticleInfoModel().obs;
+   Rx<ArticleInfoModel> articleinfo = ArticleInfoModel().obs;
   RxList<ArticleInfoRelated> articleInfoRelated = RxList();
   RxList<ArticleInfoTags> articleInfoTags = RxList();
 
+@override
+onInit(){
+  super.onInit();
 
+  getArticleInfo(id);
+}
 
 
   getArticleInfo(id)async{
+
+  // articleInfoRelated.clear();
+  // articleInfoTags.clear();
     loading.value = true;
      var response = await DioService().getMethod(ConstantUrl.baseUrl+'article/get.php?command=info&id=$id&user_id=1');
      if(response.statusCode == 200){
+
           articleinfo.value = ArticleInfoModel.fromjson(response.data);
-          response.data.forEach((element){
+          loading.value = false;
+          response.data["related"].forEach((element){
             articleInfoRelated.add(ArticleInfoRelated.fromjson(element));
           });
-          response.data.forEach((element){
+          response.data["tags"].forEach((element){
+
             articleInfoTags.add(ArticleInfoTags.fromjson(element));
           });
-          // log(https://techblog.sasansafari.comarticle/get.php?command=info&id=$id&user_id=1);
+
+
      }
-     loading.value = false;
+
   }
 
 

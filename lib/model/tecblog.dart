@@ -182,15 +182,15 @@ class ArticleInfoRelated{
     this.related_created_at,
 });
   ArticleInfoRelated.fromjson(Map<String, dynamic> element){
-    related_id = element['related']['id'];
-    related_title = element['related']['title'];
-    related_image = ConstantUrl.hostDlUrl+element['related']['image'];
-    related_cat_id = element['related']['cat_id'];
-    related_cat_name = element['related']['cat_name'];
-    related_author = element['related']['author'];
-    related_view = element['related']['view'];
-    related_status = element['related']['status'];
-    related_created_at = element['related']['created_at'];
+    related_id = element['id'];
+    related_title = element['title'];
+    related_image = ConstantUrl.hostDlUrl+element['image'];
+    related_cat_id = element['cat_id'];
+    related_cat_name = element['cat_name'];
+    related_author = element['author'];
+    related_view = element['view'];
+    related_status = element['status'];
+    related_created_at = element['created_at'];
 
   }
 }
@@ -206,8 +206,8 @@ class ArticleInfoTags{
     this.tags_title,
 });
   ArticleInfoTags.fromjson(Map<String , dynamic> element){
-    tags_id =element['tags']['id'];
-    tags_title= element['tags']['title'];
+    tags_id =element['id'];
+    tags_title= element['title'];
   }
 
 }

@@ -47,9 +47,14 @@ class GradiantColors{
   ];
   static const List<Color> articleInfo = [
 
-    Color.fromARGB(0, 0, 0, 0)
+    Color.fromARGB(0, 118, 57, 224)
     ,Color.fromARGB(195, 72, 20, 88)
     ,
+  ]; static const List<Color> articleInfoRelated = [
+
+
+  Color.fromARGB(255, 231, 222, 221),
+    Colors.transparent,
   ];
  
 }

@@ -1,6 +1,3 @@
-
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -10,6 +7,7 @@ import 'package:tecblog/component/my_string.dart';
 import 'package:tecblog/controller/ArticleInfoController.dart';
 
 import '../component/my_colors.dart';
+import '../gen/assets.gen.dart';
 
 class ArticleInfo extends StatefulWidget {
   const ArticleInfo({super.key});
@@ -19,97 +17,161 @@ class ArticleInfo extends StatefulWidget {
 }
 
 class _ArticleInfoState extends State<ArticleInfo> {
-  ArticleInfoController articleInfoController = Get.put(ArticleInfoController());
+  ArticleInfoController articleInfoController =
+      Get.put(ArticleInfoController());
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     articleInfoController.getArticleInfo(articleInfoController.id.value);
   }
+
   @override
   Widget build(BuildContext context) {
-var size = MediaQuery.of(context).size;
-    TextTheme theme= Theme.of(context).textTheme;
+    var size = MediaQuery.of(context).size;
+    TextTheme theme = Theme.of(context).textTheme;
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Scaffold(
-          body: SizedBox(
-height: size.height,
+      child: Scaffold(
+        body: Obx(
+          () => SizedBox(
+            height: size.height,
             width: size.width,
-            child: Obx(
-
-                ()=>Column(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
                   SizedBox(
-                    height: 250,
-                    width: 300,
-                    // height: MediaQuery.of(context).size.height/5,
-                    // width: MediaQuery.of(context).size.width,
+                    height: size.height / 3,
+                    width: double.infinity,
                     child: Stack(
                       children: [
-                       CachedNetworkImage(imageUrl: articleInfoController.articleinfo.value.image!,
-                       imageBuilder: (context, imageProvider) => Container(
-                         decoration: BoxDecoration(
-                           image: DecorationImage(image: imageProvider),
-                         ),
-                       ),
-                         placeholder: (context, url) => SpinKitChasingDots(),
-                         errorWidget: (context, url, error) => Icon(Icons.image_not_supported),
-                       ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(colors: GradiantColors.articleInfo,begin: Alignment.topCenter , end: Alignment.bottomCenter),
+                        Positioned.fill(
+                          top: 5,
+                          left: 0,
+                          right: 0,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                articleInfoController.articleinfo.value.image!,
+                            width: double.infinity,
+                            height: 250,
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(image: imageProvider),
+                              ),
+                            ),
+                            placeholder: (context, url) => SpinKitChasingDots(),
+                            errorWidget: (context, url, error) =>
+                                const Center(child: Icon(Icons.image_not_supported)),
                           ),
-                          child: Row(
-                            children: [
-                              IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_forward_outlined)),
-                              IconButton(onPressed: (){}, icon: const Icon(Icons.share)),
-                              IconButton(onPressed: (){}, icon: const Icon(Icons.bookmark_border_outlined)),
-                            ],
+                        ),
+                        // TODO: قابلیت انتشار را در اپ بار امکان پذیر کم
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          left: 0,
+                          child: Container(
+                            height: 40,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: GradiantColors.articleInfo,
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                    onPressed: () {},
+                                    icon:
+                                        const Icon(Icons.arrow_forward_outlined)),
+                                const Expanded(
+                                  child: SizedBox(),
+                                ),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.share)),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                        Icons.bookmark_border_outlined)),
+                              ],
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      child: Column(children: [
-                        Text(articleInfoController.articleinfo.value.title!),
-                        Row(children: [
-                          Icon(Icons.person),
-                          Text(articleInfoController.articleinfo.value.author!),
-                          Text(articleInfoController.articleinfo.value.created_at!),
-                        ],),
-                        Text(articleInfoController.articleinfo.value.content!),
-                        Row(children: [
-                          ListView.builder(itemBuilder: (context, index) {
-                            MainTags(textTheme: theme, index: index,);
-                          },)
-                        ],),
-                        Text(MyStrings.relatedArticle),
-                        SizedBox(
-                          width: 300,
-                          height: 250,
-                          child: ListView.builder(
-                            itemBuilder: (context, index) {
-                              Container(
-                                height: 250,
-                                width: 300,
-                                child: Row(children: [
-                                  Stack(
-                                    children: [
-                                      cached_network_spinkit(articleInfoController.articleInfoRelated.value[index].related_image!, true, GradiantColors.relatedArticle),
-                                      Text(articleInfoController.articleInfoRelated.value[index].related_author!),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(articleInfoController.articleinfo.value.title!,style: theme.titleLarge,),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Row(children: [
+                      const Icon(Icons.person),
+                       const SizedBox(width: 10,),
+                      Text(articleInfoController.articleinfo.value.author!),
+                       const SizedBox(width: 10,),
+                       Text(articleInfoController
+                           .articleinfo.value.created_at!)
 
-                                    ],
-                                  )
-                                ],),
+                  ],),
+                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        articleInfoController.articleinfo.value.content!),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 45,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                          itemCount:
+                           articleInfoController.articleInfoTags.length,
+                          itemBuilder: (context,index){
+                            return  MainTagInfo(articleInfoController: articleInfoController, theme: theme,index: index,);
+                          }),
+                    ),
+                  ),
+                  Container(
+                    height: size.height/5,
+                    width: double.infinity,
+                    color: Colors.amber,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: articleInfoController.articleInfoRelated.length,
+                      itemBuilder: (context, index) {
+                      return Container(
+                        width: 190,
+                        color: Colors.pink,
+                        child: Column(
+                          children: [
+                            CachedNetworkImage(imageUrl: articleInfoController.articleInfoRelated.value[index].related_image!,
+                            height: 90,
+                            width: 190,
+                            imageBuilder: (context, imageProvider){
+                           return   Container(
+                                height: 90,
+                                width: 190,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(image: imageProvider,fit: BoxFit.cover),
+                                ),
+                             foregroundDecoration: BoxDecoration(
+                               gradient: LinearGradient(colors: GradiantColors.articleInfoRelated,begin: Alignment.bottomCenter, end: Alignment.topCenter)
+                             ),
                               );
                             },
-                          ),
+                              placeholder: (context, url) => spinkit(Colors.pink),
+                              errorWidget: (context, url, error) => Icon(Icons.add),
+                            )
+                          ],
                         ),
-                      ],),
-                    ),
+                      );
+                    },),
                   )
                 ],
               ),
@@ -120,3 +182,51 @@ height: size.height,
     );
   }
 }
+
+
+
+
+
+
+
+// Row(
+// children: [
+// ListView.builder(
+// itemBuilder: (context, index) {
+// MainTags(
+// textTheme: theme,
+// index: index,
+// );
+// },
+// )
+// ],
+// ),
+// Text(MyStrings.relatedArticle),
+// SizedBox(
+// width: 300,
+// height: 250,
+// child: ListView.builder(
+// itemBuilder: (context, index) {
+// Container(
+// height: 250,
+// width: 300,
+// child: Row(
+// children: [
+// Stack(
+// children: [
+// cached_network_spinkit(
+// articleInfoController.articleInfoRelated
+//     .value[index].related_image!,
+// true,
+// GradiantColors.relatedArticle),
+// Text(articleInfoController.articleInfoRelated
+//     .value[index].related_author!),
+// ],
+// )
+// ],
+// ),
+// );
+// },
+// ),
+// )
+//

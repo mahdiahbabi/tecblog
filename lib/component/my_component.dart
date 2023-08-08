@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:tecblog/controller/ArticleInfoController.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../controller/HomeScreenController.dart';
 import '../gen/assets.gen.dart';
 
 import 'my_colors.dart';
+
 
 class TechDivider extends StatelessWidget {
   const TechDivider({
@@ -76,6 +78,60 @@ class MainTags extends StatelessWidget {
   }
 }
 
+
+class MainTagInfo extends StatelessWidget {
+  MainTagInfo({
+    super.key,
+    this.index,
+    required this.articleInfoController,
+    required this.theme,
+  });
+
+  final ArticleInfoController articleInfoController;
+  final TextTheme theme;
+  var index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Container(
+        height: 60,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(24)),
+          gradient: LinearGradient(
+              colors: GradiantColors.tags,
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+          child:  Row(
+            children: [
+              ImageIcon(
+                Assets.icons.hashtagicon.image().image,
+                color: Colors.white,
+                size: 16,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Text(
+                articleInfoController.articleInfoTags.value[index].tags_title! ,
+                style: theme.titleMedium,
+              )
+            ],
+          ),
+
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
 void gitHubUrl(String url) async {
   var Link = Uri.parse(url);
 
@@ -96,12 +152,10 @@ Widget spinkit(Color color) {
 
 Widget cached_network_spinkit(String imageurl,bool foreground, List<Color> color){
   return CachedNetworkImage(imageUrl: imageurl,
-    placeholder: (context, url)=>spinkit(Colors.pink),
-    errorWidget: (context , url , eror)=> const Icon(Icons.image_not_supported),
+
     imageBuilder: (context,imageProvider){
       return Container(
         decoration: BoxDecoration(
-
           borderRadius:
            BorderRadius.all(Radius.circular(16)),
 
@@ -118,6 +172,8 @@ Widget cached_network_spinkit(String imageurl,bool foreground, List<Color> color
       );
 
     },
+    placeholder: (context, url)=>spinkit(Colors.pink),
+    errorWidget: (context , url , eror)=> const Icon(Icons.image_not_supported),
   );
 }
 
