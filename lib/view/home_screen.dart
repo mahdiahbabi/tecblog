@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tecblog/controller/ArticleInfoController.dart';
 import 'package:tecblog/controller/HomeScreenController.dart';
+import 'package:tecblog/view/ArticleInfo.dart';
 import 'package:tecblog/view/ArticlePage.dart';
 import '../component/my_colors.dart';
 import '../component/my_component.dart';
@@ -22,6 +24,7 @@ class HomeScreen extends StatelessWidget {
   final TextTheme textTheme;
   final double bodyMargin;
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  ArticleInfoController articleInfoController = Get.put(ArticleInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -224,66 +227,73 @@ cached_network_spinkit(homeScreenController.poster.value.image!, true,GradiantCo
             //blog item
             return Padding(
               padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: size.height / 5.3,
-                      width: size.width / 2.4,
-                      child: Obx(
-                        () => Stack(
-                          children: [
-                            cached_network_spinkit(
-                                homeScreenController
-                                    .topVisitedList[index].image!,
-                                true,GradiantColors.blogPost),
-                            Positioned(
-                              bottom: 8,
-                              left: 0,
-                              right: 0,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    homeScreenController
-                                        .topVisitedList[index].author!,
-                                    style: textTheme.subtitle1,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        homeScreenController
-                                            .topVisitedList[index].view!,
-                                        style: textTheme.subtitle1,
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      const Icon(
-                                        Icons.remove_red_eye_sharp,
-                                        color: Colors.white,
-                                        size: 16,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+              child: GestureDetector(
+                onTap: () {
+                  articleInfoController.id.value = homeScreenController.topPodcastsList.value[index].id!;
+                  articleInfoController.getArticleInfo(  articleInfoController.id.value );
+                  Get.to(ArticleInfo());
+                },
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: size.height / 5.3,
+                        width: size.width / 2.4,
+                        child: Obx(
+                          () => Stack(
+                            children: [
+                              cached_network_spinkit(
+                                  homeScreenController
+                                      .topVisitedList[index].image!,
+                                  true,GradiantColors.blogPost),
+                              Positioned(
+                                bottom: 8,
+                                left: 0,
+                                right: 0,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      homeScreenController
+                                          .topVisitedList[index].author!,
+                                      style: textTheme.subtitle1,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          homeScreenController
+                                              .topVisitedList[index].view!,
+                                          style: textTheme.subtitle1,
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        const Icon(
+                                          Icons.remove_red_eye_sharp,
+                                          color: Colors.white,
+                                          size: 16,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                      width: size.width / 2.4,
-                      child: Text(
-                        homeScreenController.topVisitedList[index].title!,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ))
-                ],
+                    SizedBox(
+                        width: size.width / 2.4,
+                        child: Text(
+                          homeScreenController.topVisitedList[index].title!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ))
+                  ],
+                ),
               ),
             );
           })),
