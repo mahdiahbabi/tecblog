@@ -5,9 +5,7 @@ import 'package:get/get.dart';
 import 'package:tecblog/component/my_component.dart';
 import 'package:tecblog/component/my_string.dart';
 import 'package:tecblog/controller/ArticleInfoController.dart';
-
 import '../component/my_colors.dart';
-import '../gen/assets.gen.dart';
 
 class ArticleInfo extends StatefulWidget {
   const ArticleInfo({super.key});
@@ -61,8 +59,8 @@ class _ArticleInfoState extends State<ArticleInfo> {
                               ),
                             ),
                             placeholder: (context, url) => SpinKitChasingDots(),
-                            errorWidget: (context, url, error) =>
-                                const Center(child: Icon(Icons.image_not_supported)),
+                            errorWidget: (context, url, error) => const Center(
+                                child: Icon(Icons.image_not_supported)),
                           ),
                         ),
                         // TODO: قابلیت انتشار را در اپ بار امکان پذیر کم
@@ -83,8 +81,8 @@ class _ArticleInfoState extends State<ArticleInfo> {
                               children: [
                                 IconButton(
                                     onPressed: () {},
-                                    icon:
-                                        const Icon(Icons.arrow_forward_outlined)),
+                                    icon: const Icon(
+                                        Icons.arrow_forward_outlined)),
                                 const Expanded(
                                   child: SizedBox(),
                                 ),
@@ -104,24 +102,32 @@ class _ArticleInfoState extends State<ArticleInfo> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(articleInfoController.articleinfo.value.title!,style: theme.titleLarge,),
+                    child: Text(
+                      articleInfoController.articleinfo.value.title!,
+                      style: theme.titleLarge,
+                    ),
                   ),
-                   Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Row(children: [
-                      const Icon(Icons.person),
-                       const SizedBox(width: 10,),
-                      Text(articleInfoController.articleinfo.value.author!),
-                       const SizedBox(width: 10,),
-                       Text(articleInfoController
-                           .articleinfo.value.created_at!)
-
-                  ],),
-                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                        articleInfoController.articleinfo.value.content!),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.person),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(articleInfoController.articleinfo.value.author!),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                            articleInfoController.articleinfo.value.created_at!)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:
+                        Text(articleInfoController.articleinfo.value.content!),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -129,49 +135,122 @@ class _ArticleInfoState extends State<ArticleInfo> {
                       width: double.infinity,
                       height: 45,
                       child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
+                          scrollDirection: Axis.horizontal,
                           itemCount:
-                           articleInfoController.articleInfoTags.length,
-                          itemBuilder: (context,index){
-                            return  MainTagInfo(articleInfoController: articleInfoController, theme: theme,index: index,);
+                              articleInfoController.articleInfoTags.length,
+                          itemBuilder: (context, index) {
+                            return MainTagInfo(
+                              articleInfoController: articleInfoController,
+                              theme: theme,
+                              index: index,
+                            );
                           }),
                     ),
                   ),
                   Container(
-                    height: size.height/5,
+                    height: size.height / 4,
                     width: double.infinity,
-                    color: Colors.amber,
+                    
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: articleInfoController.articleInfoRelated.length,
+                      itemCount:
+                          articleInfoController.articleInfoRelated.length,
                       itemBuilder: (context, index) {
-                      return Container(
-                        width: 190,
-                        color: Colors.pink,
-                        child: Column(
-                          children: [
-                            CachedNetworkImage(imageUrl: articleInfoController.articleInfoRelated.value[index].related_image!,
-                            height: 90,
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Container(
                             width: 190,
-                            imageBuilder: (context, imageProvider){
-                           return   Container(
-                                height: 90,
-                                width: 190,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: imageProvider,fit: BoxFit.cover),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    CachedNetworkImage(
+                                      imageUrl: articleInfoController
+                                          .articleInfoRelated
+                                          .value[index]
+                                          .related_image!,
+                                      height: size.height * 3 / 18,
+                                      width: 190,
+                                      imageBuilder: (context, imageProvider) {
+                                        return Container(
+                                          height: 110,
+                                          width: 190,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(35),
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover),
+                                          ),
+                                          foregroundDecoration:
+                                              const BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(35)),
+                                                  gradient: LinearGradient(
+                                                      colors: GradiantColors
+                                                          .articleInfoRelated,
+                                                      begin: Alignment
+                                                          .bottomCenter,
+                                                      end:
+                                                          Alignment.topCenter)),
+                                        );
+                                      },
+                                      placeholder: (context, url) =>
+                                          spinkit(Colors.pink),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons
+                                              .image_not_supported_outlined),
+                                    ),
+                                    Positioned(
+                                      bottom: 10,
+                                      left: 10,
+                                      right: 10,
+                                      child: SizedBox(
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              articleInfoController
+                                                          .articleInfoRelated
+                                                          .value[index]
+                                                          .related_author ==
+                                                      null
+                                                  ? MyStrings
+                                                      .articleananumusaouthor
+                                                  : articleInfoController
+                                                      .articleInfoRelated
+                                                      .value[index]
+                                                      .related_author!,
+                                              style: theme.titleSmall,
+                                            ),
+                                            Expanded(
+                                                child: SizedBox(
+                                              height: 10,
+                                            )),
+                                            Icon(Icons.remove_red_eye_outlined),
+                                            Text(
+                                              articleInfoController
+                                                  .articleInfoRelated
+                                                  .value[index]
+                                                  .related_view!,
+                                              style: theme.titleSmall,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                             foregroundDecoration: BoxDecoration(
-                               gradient: LinearGradient(colors: GradiantColors.articleInfoRelated,begin: Alignment.bottomCenter, end: Alignment.topCenter)
-                             ),
-                              );
-                            },
-                              placeholder: (context, url) => spinkit(Colors.pink),
-                              errorWidget: (context, url, error) => Icon(Icons.add),
-                            )
-                          ],
-                        ),
-                      );
-                    },),
+                                Text(
+                                  articleInfoController.articleInfoRelated
+                                      .value[index].related_title!,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   )
                 ],
               ),
@@ -182,51 +261,3 @@ class _ArticleInfoState extends State<ArticleInfo> {
     );
   }
 }
-
-
-
-
-
-
-
-// Row(
-// children: [
-// ListView.builder(
-// itemBuilder: (context, index) {
-// MainTags(
-// textTheme: theme,
-// index: index,
-// );
-// },
-// )
-// ],
-// ),
-// Text(MyStrings.relatedArticle),
-// SizedBox(
-// width: 300,
-// height: 250,
-// child: ListView.builder(
-// itemBuilder: (context, index) {
-// Container(
-// height: 250,
-// width: 300,
-// child: Row(
-// children: [
-// Stack(
-// children: [
-// cached_network_spinkit(
-// articleInfoController.articleInfoRelated
-//     .value[index].related_image!,
-// true,
-// GradiantColors.relatedArticle),
-// Text(articleInfoController.articleInfoRelated
-//     .value[index].related_author!),
-// ],
-// )
-// ],
-// ),
-// );
-// },
-// ),
-// )
-//

@@ -53,7 +53,7 @@ class GradiantColors{
   ]; static const List<Color> articleInfoRelated = [
 
 
-  Color.fromARGB(255, 231, 222, 221),
+  Color.fromARGB(255, 185, 179, 179),
     Colors.transparent,
   ];
  
