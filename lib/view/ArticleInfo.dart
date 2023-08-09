@@ -115,7 +115,7 @@ class _ArticleInfoState extends State<ArticleInfo> {
                         const SizedBox(
                           width: 10,
                         ),
-                        Text(articleInfoController.articleinfo.value.author!),
+                        Text(articleInfoController.articleinfo.value.author == null ? MyStrings.articleananumusaouthor : articleInfoController.articleinfo.value.author! ),
                         const SizedBox(
                           width: 10,
                         ),
@@ -150,102 +150,110 @@ class _ArticleInfoState extends State<ArticleInfo> {
                   Container(
                     height: size.height / 4,
                     width: double.infinity,
-                    
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount:
                           articleInfoController.articleInfoRelated.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Container(
-                            width: 190,
-                            child: Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    CachedNetworkImage(
-                                      imageUrl: articleInfoController
-                                          .articleInfoRelated
-                                          .value[index]
-                                          .related_image!,
-                                      height: size.height * 3 / 18,
-                                      width: 190,
-                                      imageBuilder: (context, imageProvider) {
-                                        return Container(
-                                          height: 110,
-                                          width: 190,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(35),
-                                            image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover),
-                                          ),
-                                          foregroundDecoration:
-                                              const BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(35)),
-                                                  gradient: LinearGradient(
-                                                      colors: GradiantColors
-                                                          .articleInfoRelated,
-                                                      begin: Alignment
-                                                          .bottomCenter,
-                                                      end:
-                                                          Alignment.topCenter)),
-                                        );
-                                      },
-                                      placeholder: (context, url) =>
-                                          spinkit(Colors.pink),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(Icons
-                                              .image_not_supported_outlined),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      left: 10,
-                                      right: 10,
-                                      child: SizedBox(
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              articleInfoController
-                                                          .articleInfoRelated
-                                                          .value[index]
-                                                          .related_author ==
-                                                      null
-                                                  ? MyStrings
-                                                      .articleananumusaouthor
-                                                  : articleInfoController
-                                                      .articleInfoRelated
-                                                      .value[index]
-                                                      .related_author!,
-                                              style: theme.titleSmall,
+                        return GestureDetector(
+                          onTap: () {
+                            articleInfoController.id.value = articleInfoController.articleInfoRelated.value[index].related_id!;
+                            articleInfoController.getArticleInfo(articleInfoController.id.value);
+                            Get.to(ArticleInfo());
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              width: 190,
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      CachedNetworkImage(
+                                        imageUrl: articleInfoController
+                                            .articleInfoRelated
+                                            .value[index]
+                                            .related_image!,
+                                        height: size.height * 3 / 18,
+                                        width: 190,
+                                        imageBuilder: (context, imageProvider) {
+                                          return Container(
+                                            height: 110,
+                                            width: 190,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(35),
+                                              image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover),
                                             ),
-                                            Expanded(
-                                                child: SizedBox(
-                                              height: 10,
-                                            )),
-                                            Icon(Icons.remove_red_eye_outlined),
-                                            Text(
-                                              articleInfoController
-                                                  .articleInfoRelated
-                                                  .value[index]
-                                                  .related_view!,
-                                              style: theme.titleSmall,
-                                            ),
-                                          ],
-                                        ),
+                                            foregroundDecoration:
+                                                const BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(35)),
+                                                    gradient: LinearGradient(
+                                                        colors: GradiantColors
+                                                            .articleInfoRelated,
+                                                        begin: Alignment
+                                                            .bottomCenter,
+                                                        end:
+                                                            Alignment.topCenter)),
+                                          );
+                                        },
+                                        placeholder: (context, url) =>
+                                            spinkit(Colors.pink),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons
+                                                .image_not_supported_outlined),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  articleInfoController.articleInfoRelated
-                                      .value[index].related_title!,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                )
-                              ],
+                                      Positioned(
+                                        bottom: 10,
+                                        left: 10,
+                                        right: 10,
+                                        child: SizedBox(
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                articleInfoController
+                                                            .articleInfoRelated
+                                                            .value[index]
+                                                            .related_author ==
+                                                        null
+                                                    ? MyStrings
+                                                        .articleananumusaouthor
+                                                    : articleInfoController
+                                                        .articleInfoRelated
+                                                        .value[index]
+                                                        .related_author!,
+                                                style: theme.titleSmall,
+                                              ),
+                                              Expanded(
+                                                  child: SizedBox(
+                                                height: 10,
+                                              )),
+                                              Icon(Icons.remove_red_eye_outlined),
+                                              Text(
+                                                articleInfoController
+                                                    .articleInfoRelated
+                                                    .value[index]
+                                                    .related_view!,
+                                                style: theme.titleSmall,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Text(
+                                    articleInfoController.articleInfoRelated
+                                        .value[index].related_title!,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );

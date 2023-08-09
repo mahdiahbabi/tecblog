@@ -139,18 +139,17 @@ class ArticleInfoModel{
 
   ArticleInfoModel.fromjson(Map<String , dynamic> element){
 
-    id = element['info']['id'];
-    title = element['info']['title'];
-    content = element['info']['content'];
+    id = element['info']['id'] ?? 'لرد ' ;
+    title = element['info']['title']?? 'لرد ';
+    content = element['info']['content']?? 'لرد ';
     image = ConstantUrl.hostDlUrl+element['info']['image'];
-    cat_id = element['info']['cat_id'];
-    cat_name = element['info']['cat_name'];
-    author = element['info']['author'];
-    view = element['info']['view'];
-    status = element['info']['status'];
-    created_at = element['info']['created_at'];
-   isFavorite = element['isFavorite'];
-
+    cat_id = element['info']['cat_id']?? 'لرد ';
+    cat_name = element['info']['cat_name']?? 'لرد ';
+    author = element['info']['author']?? 'لرد ';
+    view = element['info']['view']?? 'لرد ';
+    status = element['info']['status']?? 'لرد ';
+   isFavorite = element['isFavorite']?? 'لرد ';
+    created_at = element['info']['created_at']?? 'لرد ';
   }
 
 

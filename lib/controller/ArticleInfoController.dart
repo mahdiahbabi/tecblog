@@ -28,8 +28,8 @@ onInit(){
 
   getArticleInfo(id)async{
 
-  // articleInfoRelated.clear();
-  // articleInfoTags.clear();
+  articleInfoRelated.clear();
+  articleInfoTags.clear();
     loading.value = true;
      var response = await DioService().getMethod(ConstantUrl.baseUrl+'article/get.php?command=info&id=$id&user_id=1');
      if(response.statusCode == 200){
