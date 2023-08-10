@@ -6,6 +6,7 @@ import 'package:tecblog/component/my_component.dart';
 import 'package:tecblog/component/my_string.dart';
 import 'package:tecblog/controller/ArticleInfoController.dart';
 import '../component/my_colors.dart';
+import '../gen/assets.gen.dart';
 
 class ArticleInfo extends StatefulWidget {
   const ArticleInfo({super.key});
@@ -16,7 +17,7 @@ class ArticleInfo extends StatefulWidget {
 
 class _ArticleInfoState extends State<ArticleInfo> {
   ArticleInfoController articleInfoController =
-      Get.put(ArticleInfoController());
+  Get.put(ArticleInfoController());
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _ArticleInfoState extends State<ArticleInfo> {
     return SafeArea(
       child: Scaffold(
         body: Obx(
-          () => SizedBox(
+              () => SizedBox(
             height: size.height,
             width: size.width,
             child: SingleChildScrollView(
@@ -50,7 +51,7 @@ class _ArticleInfoState extends State<ArticleInfo> {
                           right: 0,
                           child: CachedNetworkImage(
                             imageUrl:
-                                articleInfoController.articleinfo.value.image!,
+                            articleInfoController.articleinfo.value.image ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjzC2JyZDZ_RaWf0qp11K0lcvB6b6kYNMoqtZAQ9hiPZ4cTIOB',
                             width: double.infinity,
                             height: 250,
                             imageBuilder: (context, imageProvider) => Container(
@@ -127,7 +128,7 @@ class _ArticleInfoState extends State<ArticleInfo> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child:
-                        Text(articleInfoController.articleinfo.value.content!),
+                    Text(articleInfoController.articleinfo.value.content!),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -137,7 +138,7 @@ class _ArticleInfoState extends State<ArticleInfo> {
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount:
-                              articleInfoController.articleInfoTags.length,
+                          articleInfoController.articleInfoTags.length,
                           itemBuilder: (context, index) {
                             return MainTagInfo(
                               articleInfoController: articleInfoController,
@@ -147,19 +148,19 @@ class _ArticleInfoState extends State<ArticleInfo> {
                           }),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: size.height / 4,
                     width: double.infinity,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount:
-                          articleInfoController.articleInfoRelated.length,
+                      articleInfoController.articleInfoRelated.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
                             articleInfoController.id.value = articleInfoController.articleInfoRelated.value[index].related_id!;
                             articleInfoController.getArticleInfo(articleInfoController.id.value);
-                            Get.to(ArticleInfo());
+                            Get.to(()=>const ArticleInfo());
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
@@ -182,30 +183,30 @@ class _ArticleInfoState extends State<ArticleInfo> {
                                             width: 190,
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(35),
+                                              BorderRadius.circular(35),
                                               image: DecorationImage(
                                                   image: imageProvider,
                                                   fit: BoxFit.cover),
                                             ),
                                             foregroundDecoration:
-                                                const BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(35)),
-                                                    gradient: LinearGradient(
-                                                        colors: GradiantColors
-                                                            .articleInfoRelated,
-                                                        begin: Alignment
-                                                            .bottomCenter,
-                                                        end:
-                                                            Alignment.topCenter)),
+                                            const BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius.all(
+                                                    Radius.circular(35)),
+                                                gradient: LinearGradient(
+                                                    colors: GradiantColors
+                                                        .articleInfoRelated,
+                                                    begin: Alignment
+                                                        .bottomCenter,
+                                                    end:
+                                                    Alignment.topCenter)),
                                           );
                                         },
                                         placeholder: (context, url) =>
                                             spinkit(Colors.pink),
                                         errorWidget: (context, url, error) =>
-                                            const Icon(Icons
-                                                .image_not_supported_outlined),
+                                        const Icon(Icons
+                                            .image_not_supported_outlined),
                                       ),
                                       Positioned(
                                         bottom: 10,
@@ -216,22 +217,22 @@ class _ArticleInfoState extends State<ArticleInfo> {
                                             children: [
                                               Text(
                                                 articleInfoController
-                                                            .articleInfoRelated
-                                                            .value[index]
-                                                            .related_author ==
-                                                        null
+                                                    .articleInfoRelated
+                                                    .value[index]
+                                                    .related_author ==
+                                                    null
                                                     ? MyStrings
-                                                        .articleananumusaouthor
+                                                    .articleananumusaouthor
                                                     : articleInfoController
-                                                        .articleInfoRelated
-                                                        .value[index]
-                                                        .related_author!,
+                                                    .articleInfoRelated
+                                                    .value[index]
+                                                    .related_author!,
                                                 style: theme.titleSmall,
                                               ),
                                               Expanded(
                                                   child: SizedBox(
-                                                height: 10,
-                                              )),
+                                                    height: 10,
+                                                  )),
                                               Icon(Icons.remove_red_eye_outlined),
                                               Text(
                                                 articleInfoController

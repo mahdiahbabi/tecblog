@@ -15,7 +15,7 @@ class ArticleModel {
   ArticleModel({
     required this.id,
     required this.title,
-     this.image,
+    this.image,
     required this.cat_id,
     required this.cat_name,
     required this.author,
@@ -75,9 +75,9 @@ class PosterModel {
   String? image;
 
   PosterModel({
-     this.id,
-     this.title,
-     this.image,
+    this.id,
+    this.title,
+    this.image,
   });
 
   PosterModel.fromjson(Map<String, dynamic> element) {
@@ -122,20 +122,20 @@ class ArticleInfoModel{
 
 
   ArticleInfoModel({
-     this.id,
-     this.title,
-     this.content,
-     this.image,
-     this.cat_id,
-     this.cat_name,
-     this.author,
-     this.view,
-     this.status,
-     this.created_at,
-     this.isFavorite,
+    this.id,
+    this.title,
+    this.content,
+    this.image,
+    this.cat_id,
+    this.cat_name,
+    this.author,
+    this.view,
+    this.status,
+    this.created_at,
+    this.isFavorite,
 
 
-});
+  });
 
   ArticleInfoModel.fromjson(Map<String , dynamic> element){
 
@@ -148,7 +148,7 @@ class ArticleInfoModel{
     author = element['info']['author']?? 'لرد ';
     view = element['info']['view']?? 'لرد ';
     status = element['info']['status']?? 'لرد ';
-   isFavorite = element['isFavorite']?? 'لرد ';
+    isFavorite = element['isFavorite']?? 'لرد ';
     created_at = element['info']['created_at']?? 'لرد ';
   }
 
@@ -179,7 +179,7 @@ class ArticleInfoRelated{
     this.related_view,
     this.related_status,
     this.related_created_at,
-});
+  });
   ArticleInfoRelated.fromjson(Map<String, dynamic> element){
     related_id = element['id'];
     related_title = element['title'];
@@ -203,7 +203,7 @@ class ArticleInfoTags{
 
     this.tags_id,
     this.tags_title,
-});
+  });
   ArticleInfoTags.fromjson(Map<String , dynamic> element){
     tags_id =element['id'];
     tags_title= element['title'];

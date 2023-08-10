@@ -220,83 +220,86 @@ cached_network_spinkit(homeScreenController.poster.value.image!, true,GradiantCo
   Widget HomePageBlogList() {
     return SizedBox(
       height: size.height / 3.2,
-      child: ListView.builder(
-          itemCount: homeScreenController.topVisitedList.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: ((context, index) {
-            //blog item
-            return Padding(
-              padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-              child: GestureDetector(
-                onTap: () {
-                  articleInfoController.id.value = homeScreenController.topPodcastsList.value[index].id!;
-                  articleInfoController.getArticleInfo(  articleInfoController.id.value );
-                  Get.to(ArticleInfo());
-                },
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: size.height / 5.3,
-                        width: size.width / 2.4,
-                        child: Obx(
-                          () => Stack(
-                            children: [
-                              cached_network_spinkit(
-                                  homeScreenController
-                                      .topVisitedList[index].image!,
-                                  true,GradiantColors.blogPost),
-                              Positioned(
-                                bottom: 8,
-                                left: 0,
-                                right: 0,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+      child: Obx(
+          ()=> ListView.builder(
+            itemCount: homeScreenController.topVisitedList.length-1,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: ((context, index) {
+              //blog item
+              return Padding(
+                  padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                  child: GestureDetector(
+                    onTap: () {
+
+                       articleInfoController.getArticleInfo(homeScreenController.topVisitedList[index].id);
+
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            height: size.height / 5.3,
+                            width: size.width / 2.4,
+                            child:  Stack(
                                   children: [
-                                    Text(
-                                      homeScreenController
-                                          .topVisitedList[index].author!,
-                                      style: textTheme.subtitle1,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          homeScreenController
-                                              .topVisitedList[index].view!,
-                                          style: textTheme.subtitle1,
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        const Icon(
-                                          Icons.remove_red_eye_sharp,
-                                          color: Colors.white,
-                                          size: 16,
-                                        ),
-                                      ],
-                                    ),
+                                    cached_network_spinkit(
+                                        homeScreenController
+                                            .topVisitedList[index].image!,
+                                        true,GradiantColors.blogPost),
+                                    Positioned(
+                                      bottom: 8,
+                                      left: 0,
+                                      right: 0,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            homeScreenController
+                                                .topVisitedList[index].author!,
+                                            style: textTheme.subtitle1,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                homeScreenController
+                                                    .topVisitedList[index].view!,
+                                                style: textTheme.subtitle1,
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              const Icon(
+                                                Icons.remove_red_eye_sharp,
+                                                color: Colors.white,
+                                                size: 16,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                            ),
+                            ),
+
+
+                        SizedBox(
+                            width: size.width / 2.4,
+                            child: Text(
+                              homeScreenController.topVisitedList[index].title!,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ))
+                      ],
                     ),
-                    SizedBox(
-                        width: size.width / 2.4,
-                        child: Text(
-                          homeScreenController.topVisitedList[index].title!,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ))
-                  ],
-                ),
-              ),
-            );
-          })),
+                  )
+
+
+              );})),
+      ),
     );
   }
 }

@@ -10,7 +10,7 @@ import '../service/DioServise.dart';
 class HomeScreenController extends GetxController {
 
   RxBool loading = true.obs;
-   late Rx<PosterModel> poster = PosterModel().obs ;
+  late Rx<PosterModel> poster = PosterModel().obs ;
   RxList tagsList = RxList();
   RxList<ArticleModel> topVisitedList = RxList();
   RxList<PodcastModel> topPodcastsList = RxList();
@@ -38,7 +38,7 @@ class HomeScreenController extends GetxController {
       response.data['tags'].forEach((element) {
         tagsList.add(TagsModel.fromjson(element));
       });
-poster.value = PosterModel.fromjson(response.data['poster']);
+      poster.value = PosterModel.fromjson(response.data['poster']);
 
     }
     loading.value = false;

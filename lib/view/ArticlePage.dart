@@ -20,9 +20,9 @@ class ArticlePage extends StatefulWidget {
 
 class _ArticlePageState extends State<ArticlePage> {
   ArticlePageController articlePageController =
-      Get.put(ArticlePageController());
+  Get.put(ArticlePageController());
   ArticleInfoController articleInfoController =
-      Get.put(ArticleInfoController());
+  Get.put(ArticleInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,100 +41,100 @@ class _ArticlePageState extends State<ArticlePage> {
       ),
       body: SizedBox(
         child: Obx(
-          () => !articlePageController.loading.value
+              () => !articlePageController.loading.value
               ? ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: articlePageController.articleList.length,
-                  itemBuilder: ((context, index) {
-                    return GestureDetector(
-                      onTap: (()  {
-                        articleInfoController.id.value=articlePageController.articleList.value[index].id!;
-                        Get.to(ArticleInfo());
-                      }),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
+            scrollDirection: Axis.vertical,
+            itemCount: articlePageController.articleList.length,
+            itemBuilder: ((context, index) {
+              return GestureDetector(
+                onTap: (()  {
+                  articleInfoController.id.value=articlePageController.articleList.value[index].id!;
+                  Get.to(ArticleInfo());
+                }),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment:
+                    CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: Get.height / 6,
+                        width: Get.width / 3,
+                        child: CachedNetworkImage(
+                          imageUrl: articlePageController
+                              .articleList[index].image!,
+                          imageBuilder: (((context, imageProvider) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(25)),
+                                  image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover)),
+                            );
+                          })),
+                          placeholder: ((context, url) {
+                            return spinkit(Colors.pink);
+                          }),
+                          errorWidget: ((context, url, error) {
+                            return Icon(
+                                Icons.image_not_supported_outlined,
+                                size: 15,
+                                color: SolidColors.primeryColor);
+                          }),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: Get.height / 6,
-                              width: Get.width / 3,
-                              child: CachedNetworkImage(
-                                imageUrl: articlePageController
-                                    .articleList[index].image!,
-                                imageBuilder: (((context, imageProvider) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(25)),
-                                        image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover)),
-                                  );
-                                })),
-                                placeholder: ((context, url) {
-                                  return spinkit(Colors.pink);
-                                }),
-                                errorWidget: ((context, url, error) {
-                                  return Icon(
-                                      Icons.image_not_supported_outlined,
-                                      size: 15,
-                                      color: SolidColors.primeryColor);
-                                }),
+                              width: Get.width / 2,
+                              child: Text(
+                                articlePageController
+                                    .articleList[index].title!,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            Container(
+                              height: 10,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: Get.width / 2,
-                                    child: Text(
-                                      articlePageController
-                                          .articleList[index].title!,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        articlePageController
-                                                .articleList[index].author! +
-                                            '  بازدید :',
-                                        style: theme.textTheme.bodySmall,
-                                      ),
-                                      Container(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        articlePageController
-                                            .articleList[index].view!,
-                                        style: theme.textTheme.bodySmall,
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                            Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  articlePageController
+                                      .articleList[index].author! +
+                                      '  بازدید :',
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                Container(
+                                  width: 10,
+                                ),
+                                Text(
+                                  articlePageController
+                                      .articleList[index].view!,
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                              ],
                             )
                           ],
                         ),
-                      ),
-                    );
-                  }),
-                )
+                      )
+                    ],
+                  ),
+                ),
+              );
+            }),
+          )
               : spinkit(Colors.pink),
         ),
       ),
